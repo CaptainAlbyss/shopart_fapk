@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:carousel_pro/carousel_pro.dart';
 import 'package:shopart_apk/componentes/products.dart';
 import 'package:responsive_container/responsive_container.dart';
+import 'package:shopart_apk/paginas/Carrito.dart';
 
 void main(){
   runApp(
@@ -26,8 +27,10 @@ class _HomePageState extends State<HomePage>{
         backgroundColor: Colors.blue,
         title: Text('ShopArt'),
         actions: <Widget>[
-          new IconButton(icon: Icon(Icons.search), color: Colors.white70, onPressed: (){showSearch(context: context, delegate: null);}),
-          new IconButton(icon: Icon(Icons.shopping_cart), color: Colors.white70, onPressed: (){})
+          new IconButton(icon: Icon(Icons.search), color: Colors.white70, onPressed: (){}),
+          new IconButton(icon: Icon(Icons.shopping_cart), color: Colors.white70, onPressed: (){
+            Navigator.push(context, MaterialPageRoute(builder: (context)=> new Cart()));
+          })
 
         ],
       ),
@@ -77,10 +80,12 @@ class _HomePageState extends State<HomePage>{
             ),
 
             InkWell(
-              onTap: (){},
+              onTap: (){
+                Navigator.push(context, MaterialPageRoute(builder: (context) => new Cart()));
+              },
               child: ListTile(
-                title: Text('Historial'),
-                leading: Icon(Icons.shop, color: Colors.lightBlue),
+                title: Text('Tu Carrito'),
+                leading: Icon(Icons.shopping_cart, color: Colors.lightBlue),
               ),
             ),
 

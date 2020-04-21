@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_container/responsive_container.dart';
+import 'package:shopart_apk/main.dart';
 
 class ProductDetails extends StatefulWidget {
   final produc_detail_name;
@@ -23,7 +24,11 @@ class _ProductDetailsState extends State<ProductDetails> {
       appBar: new AppBar(
         elevation: 0.1,
         backgroundColor: Colors.blue,
-        title: Text('ShopArt'),
+        title: InkWell(
+          onTap: (){Navigator.push(context, MaterialPageRoute(builder: (context)=> new HomePage()));},
+          child: Text('ShopArt'),
+        ),
+        
         actions: <Widget>[
           new IconButton(
               icon: Icon(
@@ -31,12 +36,6 @@ class _ProductDetailsState extends State<ProductDetails> {
                 color: Colors.white,
               ),
               onPressed: (){}),
-          new IconButton(
-              icon: Icon(
-                Icons.shopping_cart,
-                color: Colors.white,
-              ),
-              onPressed: (){})
         ],
       ),
 
@@ -70,7 +69,22 @@ class _ProductDetailsState extends State<ProductDetails> {
             children: <Widget>[
               Expanded(
                 child: MaterialButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    showDialog(context: context,
+                    builder: (context) {
+                      return new AlertDialog(
+                        title: new Text('Cantidad'),
+                        content: new Text('Escoge la cantidad'),
+                        actions: <Widget>[
+                          new MaterialButton(onPressed: (){
+                            Navigator.of(context).pop(context);
+                          },
+                            child: new Text('Cerrar'),
+                          )
+                        ],
+                      );
+                    });
+                  },
                   color: Colors.white,
                   textColor: Colors.grey,
                   elevation: 0.0,
@@ -104,8 +118,12 @@ class _ProductDetailsState extends State<ProductDetails> {
               ),
               new IconButton(icon: Icon(Icons.add_shopping_cart), color: Colors.red, onPressed: (){})
             ],
+          ),
+          Divider(color: Colors.red),
+          new ListTile(
+            title: new Text('Detalles del producto\n'),
+            subtitle: new Text('Shopark se visiona para el 2021 como una de las primeras plataformas regionales mas importantes del país, que busca expandir el consumo de productos Santandereanos en le menos tiempo posible. También Shopark espera expandirse en diferentes regiones del país para promocionar los diferentes productos de los micro empresarios.'),
           )
-
                       ],
                     ),
                   );
