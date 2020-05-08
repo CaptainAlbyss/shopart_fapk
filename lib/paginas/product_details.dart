@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:responsive_container/responsive_container.dart';
 import 'package:shopart_apk/main.dart';
+import 'home.dart';
+
 
 class ProductDetails extends StatefulWidget {
   final produc_detail_name;

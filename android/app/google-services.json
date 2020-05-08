@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "744381599011",
+    "firebase_url": "https://shopart-8cb78.firebaseio.com",
+    "project_id": "shopart-8cb78",
+    "storage_bucket": "shopart-8cb78.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:744381599011:android:888416b4e77cebccc1d096",
+        "android_client_info": {
+          "package_name": "com.shopart.shopart_apk"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "744381599011-kodf70ii1gi47ls47n5hlaseaaqb91ml.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.shopart.shopart_apk",
+            "certificate_hash": "828b8d8bba8140db3995410f3d28428dd6c19687"
+          }
+        },
+        {
+          "client_id": "744381599011-v44qftjhlvfg5curoqt8a8l1r7ido0h9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAKXNko5k2mZl7GK4bN5zNqLvLewC_GhNI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "744381599011-v44qftjhlvfg5curoqt8a8l1r7ido0h9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
