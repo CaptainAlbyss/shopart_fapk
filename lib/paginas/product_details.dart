@@ -20,6 +20,8 @@ class ProductDetails extends StatefulWidget {
 }
 
 class _ProductDetailsState extends State<ProductDetails> {
+
+  //===========================iconos y rutas ===================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,6 +42,8 @@ class _ProductDetailsState extends State<ProductDetails> {
               onPressed: (){}),
         ],
       ),
+
+      //===========================Contenedor donde se ven los detalles de los productos==============================
 
       body: new ListView(
         children: <Widget>[

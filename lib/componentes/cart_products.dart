@@ -7,6 +7,8 @@ class Cart_Products extends StatefulWidget {
 
 class _Cart_ProductsState extends State<Cart_Products> {
 
+
+  //===============Productos de prueba en el carrito=============================
   var Products_en_carrito = [
     {
       "name": "Objeto 1",

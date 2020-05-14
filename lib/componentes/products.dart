@@ -8,6 +8,8 @@ class Products extends StatefulWidget {
 }
 
 class _ProductsState extends State<Products> {
+
+  //==============================productos en la pagina principal mostrada==========================================
   var product_list = [
     {
       "name": "Objeto 1",
@@ -61,6 +63,7 @@ class _ProductsState extends State<Products> {
         });
   }
 }
+//=========variables globales==============================
 
 class Single_prod extends StatelessWidget {
   final prod_name;
@@ -73,6 +76,8 @@ class Single_prod extends StatelessWidget {
     this.prod_price,
   });
 
+//============================== informacion de los productos========================
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -81,7 +86,9 @@ class Single_prod extends StatelessWidget {
         child: Material(
           child: InkWell(
             onTap: () => Navigator.of(context).push(new MaterialPageRoute(
+
               //pasando los valores de los productos a la pagina de detalles de productos
+
                 builder: (context) => new ProductDetails(
                   produc_detail_name: prod_name,
                   produc_detail_picture: prod_picture,

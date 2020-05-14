@@ -30,6 +30,9 @@ class _HomePageState extends State<HomePage>{
         child: new ListView(
           children: <Widget>[
             //Esta vuelta hay que cambiarla para tomar de la Base de datos NO OLVIDAR!!!!!!
+
+            //========================================Correo informacion de usuario==========================
+
             new UserAccountsDrawerHeader(
               accountName: Text('Probador'),
               accountEmail: Text('prueba@prueba.com'),
@@ -44,7 +47,7 @@ class _HomePageState extends State<HomePage>{
               ),
             ),
 
-            //Cuerpo de menu
+            //===================================Cuerpo de menu======================================================
 
             InkWell(
               onTap: (){},
@@ -101,6 +104,9 @@ class _HomePageState extends State<HomePage>{
         ),
       ),
 
+
+
+       //=====================================Cuerpo de las imagenes ========================================================
       body: new ListView(
         children: <Widget>[
           new Padding(padding: const EdgeInsets.all(15.0),

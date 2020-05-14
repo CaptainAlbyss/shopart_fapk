@@ -10,6 +10,8 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+
+  //======================================= iconos y rutas del carrito ==========================================
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -24,6 +26,9 @@ class _CartState extends State<Cart> {
           new IconButton(icon: Icon(Icons.search), color: Colors.white70, onPressed: (){}),
         ],
       ),
+
+
+      //==========================================Cuerpo del carrito de productos===============================
 
       body: new Cart_Products(),
 
