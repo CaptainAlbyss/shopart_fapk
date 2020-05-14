@@ -3,6 +3,8 @@ import 'package:carousel_pro/carousel_pro.dart';
 import 'package:shopart_apk/componentes/products.dart';
 import 'package:responsive_container/responsive_container.dart';
 import 'package:shopart_apk/paginas/Carrito.dart';
+import 'package:google_sign_in/google_sign_in.dart';
+import 'login.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -11,6 +13,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage>{
   @override
+
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: new AppBar(
@@ -34,8 +37,8 @@ class _HomePageState extends State<HomePage>{
             //========================================Correo informacion de usuario==========================
 
             new UserAccountsDrawerHeader(
-              accountName: Text('Probador'),
-              accountEmail: Text('prueba@prueba.com'),
+              accountName: Text('tomar de google'),
+              accountEmail: Text('tomar de google'),
               currentAccountPicture: GestureDetector(
                   child: new CircleAvatar(
                     backgroundColor: Colors.blueGrey,
@@ -125,3 +128,4 @@ class _HomePageState extends State<HomePage>{
     );
   }
 }
+

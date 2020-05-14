@@ -1,11 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:fluttertoast/fluttertoast.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'home.dart';
-
 
 class Login extends StatefulWidget {
   @override
@@ -13,111 +8,58 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  final GoogleSignIn googleSignIn = new GoogleSignIn();
-  final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
-  SharedPreferences preferences;
-  bool loading = false;
-  bool isLogedin = false;
-  @override
-  void initState(){
-    super.initState();
-    isSignedIn();
-  }
 
+  //==================================Conexion via google a la APP===============================
+  bool _isLoggedIn = false;
 
-  void isSignedIn() async{
-    setState(() {
-      loading = true;
-    });
+  GoogleSignIn _googleSignIn = GoogleSignIn(scopes: ['email']);
 
-    preferences = await SharedPreferences.getInstance();
-    isLogedin = await googleSignIn.isSignedIn();
-
-    if(isLogedin){
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-    }
-
-    setState(() {
-      loading = false;
-    });
-  }
-
-  Future handleSignIn() async{
-    preferences = await SharedPreferences.getInstance();
-    setState(() {
-      loading = true;
-    });
-
-    GoogleSignInAccount googleUser = await googleSignIn.signIn();
-    GoogleSignInAuthentication googleSignInAuthentication = await googleUser.authentication;
-    AuthCredential credential = GoogleAuthProvider.getCredential(idToken: googleSignInAuthentication.idToken, accessToken: googleSignInAuthentication.accessToken);
-
-    FirebaseUser firebaseUser = (await firebaseAuth.signInWithCredential(credential)).user;
-
-    if(firebaseUser != null){
-      final QuerySnapshot result = await Firestore.instance.collection("user").where("id", isEqualTo: firebaseUser.uid).getDocuments();
-      final List<DocumentSnapshot> documents = result.documents;
-
-      if(documents.length == 0){
-        Firestore.instance.collection("user").document(firebaseUser.uid).setData({
-          "id": firebaseUser.uid,
-          "username": firebaseUser..displayName,
-          "profilePicture": firebaseUser.photoUrl
-        });
-        await preferences.setString("id", firebaseUser.uid);
-        await preferences.setString("username", firebaseUser.displayName);
-        await preferences.setString("photoUrl", firebaseUser.photoUrl);
-      }else{
-        await preferences.setString("id", documents[0]['id']);
-        await preferences.setString("username", documents[0]['username']);
-        await preferences.setString("photoUrl", documents[0]['photoUrl']);
-      }
-
-
-
-      Fluttertoast.showToast(msg: 'Entró exitosamente');
+  _login() async{
+    try{
+      await _googleSignIn.signIn();
       setState(() {
-        loading = false;
+        _isLoggedIn = true;
+        Navigator.push(context, MaterialPageRoute(builder: (context)=> new HomePage()));
       });
-      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage()));
-
-    }else{
-
+    } catch (err){
+      print(err);
     }
   }
 
+  _logout(){
+    _googleSignIn.signOut();
+    setState(() {
+      _isLoggedIn = false;
+    });
+  }
 
+
+  //=================Ver que funciono la conexion antes de entrar al home======================
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        centerTitle: true,
-        title: new Text("Login", style: TextStyle(color: Colors.red.shade900),),
-        elevation: 0.1,
-      ),
-      body: Stack(
-        children: <Widget>[
-          Center(
-            child: FlatButton(
-                color: Colors.red.shade900,
-                onPressed: (){
-                  handleSignIn();
-                }, child: Text("Entrar con Google", style: TextStyle(color: Colors.white),)),
-          ),
-          Visibility(
-            visible: loading ?? true,
-            child: Center(
-              child: Container(
-                alignment: Alignment.center,
-                color: Colors.white.withOpacity(0.9),
-                child: CircularProgressIndicator(
-                  valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
-                ),
+    // TODO: implement build
+    return MaterialApp(
+      home: Scaffold(
+        body: Center(
+            child: _isLoggedIn
+                ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Image.network(_googleSignIn.currentUser.photoUrl, height: 50.0, width: 50.0,),
+                Text(_googleSignIn.currentUser.displayName),
+                OutlineButton( child: Text("Logout"), onPressed: (){
+                  _logout();
+                },)
+              ],
+            )
+                : Center(
+              child: OutlineButton(
+                child: Text("Login with Google"),
+                onPressed: () {
+                  _login();
+                },
               ),
-            ),
-          )
-        ],
+            )),
       ),
     );
   }
